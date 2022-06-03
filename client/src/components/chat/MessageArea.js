@@ -12,7 +12,7 @@ function MessageArea() {
 
   const getChatInteraction = async () => {
 
-    const userId1 = userId;
+    const userId1 = localStorage.getItem("userId");
     const userId2 = selectedUser?.userId;
 
     if(userId1 !== undefined || userId2 !== undefined){
@@ -49,14 +49,14 @@ function MessageArea() {
 
     return () => {
       socket.off();
-      setChat([])
+      // setChat([])
     };
   }, []);
 
-
+console.log(chat.sort(sortAsc))
   useEffect(() => {
     if(![undefined, null, ""].includes(selectedUser)) getChatInteraction();  
-  }, [selectedUser]);
+  }, [getChatInteraction, selectedUser]);
 
   return (
     <div
