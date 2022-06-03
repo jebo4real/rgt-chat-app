@@ -9,7 +9,7 @@
     "dev:server": "cd server && npm run watch",
     "dev:client": "cd client && yarn start",
     "install": "cd server && npm install && cd ../client && npm install",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm build && cd ../server && npm run build"
   },
   "keywords": [],
   "author": "John Jebo",
