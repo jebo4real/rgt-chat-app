@@ -55,7 +55,6 @@ function MessageArea() {
 
 
   useEffect(() => {
-    setChat([])
     if(![undefined, null, ""].includes(selectedUser)) getChatInteraction();  
   }, [selectedUser]);
 
@@ -65,7 +64,7 @@ function MessageArea() {
       className="h-5/6 overflow-y-auto pl-4 lg:pl-8 pt-4 mb-2 lg:mb-0 h-32"
     >
       {chat.length < 1 ? (
-        <p className="absolute inset-0 flex items-center justify-center">Select a user to chat</p>
+        <p className="flex items-center justify-center h-screen">Select a user to chat</p>
       ):(
         <ul className="w-full lg:w-96 space-y-2">
         {chat.sort(sortAsc).map((el, index) => (

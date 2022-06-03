@@ -42,7 +42,7 @@ const io = new socketio.Server(server, {allowEIO3: true});
 const port = process.env.PORT || 3001;
 
 // temporarily store online users
-const onlineUsers : any = []
+let onlineUsers : any = []
 
 io.on("connection", (socket) => {
 
@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
 
   // receive message
   socket.on("chat-message", async ({ senderId, receiverId, message }) => {
-    
+    console.log(senderId, message)
     const newMessage = {
       senderId,
       receiverId,
@@ -77,7 +77,9 @@ io.on("connection", (socket) => {
 
   // remove user from online when disconnected
   socket.on("disconnect", () => {
+    console.log("disonnected")
     const newOnlineUsers = onlineUsers.filter((item:any) =>item.socketId != socket.id)
+    onlineUsers = newOnlineUsers
     io.emit("user-online", newOnlineUsers);
   });
 });

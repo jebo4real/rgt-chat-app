@@ -9,7 +9,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login/>} />
-        <Route path="/chat" element={<RequireAuth><Chat /></RequireAuth>} />
+        <Route path="/chat" element={<RequireAuth><Chat /></RequireAuth>} onLeave={ ()=>{alert("")} } />
       </Routes>
     </Router>
   );

@@ -62,7 +62,7 @@ const Chat = () => {
 
     // construct message and emit
     const messageProperties = {
-      senderId: userDetails._id,
+      senderId: localStorage.getItem("userId"),
       receiverId: selectedUser?.userId,
       message: message
     }
@@ -107,7 +107,7 @@ const Chat = () => {
                     value={message}
                   />
                 </div>
-                <div className="hidden lg:block w-1/6">
+                <div className="lg:block w-1/6">
                   <button
                     className="ml-8 flex-shrink-0 bg-gray-900 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-900 focus:outline-none focus:ring-2"
                     onClick={(e) => sendMessage(e)}

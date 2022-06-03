@@ -87,12 +87,9 @@ const Sidebar = () => {
     logout({ returnTo: window.location.origin });
   };
 
-  const uniqueArray = (a) => {
-    return [...new Set(a)];
-  };
-
   return (
-    <div className="hidden lg:block pl-4 pr-4 w-64 bg-gray-900 text-white">
+    <div className="lg:block pl-4 pr-4 w-64 bg-gray-900 text-white">
+    
       <p>
         Me: {localStorage.getItem("nickname")}{" "}
         <button
@@ -105,11 +102,9 @@ const Sidebar = () => {
       <p className="font-black my-4 text-xl"> Online</p>
       <ul className="divide-y divide-gray-300 truncate">
         {usersOnline !== null
-          ? uniqueArray(
-              usersOnline
-                .filter((item) => item.userId !== userId || null || undefined)
-                .filter(filterBlockedUsersOnline)
-            ).map((el, index) => (
+          ? usersOnline
+                .filter((item) => item.userId !== localStorage.getItem("userId") || null || undefined)
+                .filter(filterBlockedUsersOnline).map((el, index) => (
               <li key={index} className="flex flex-row gap-4">
                 <button
                   onClick={() => saveUserToMessage(el)}
@@ -118,7 +113,7 @@ const Sidebar = () => {
                   {el?.userName}
                 </button>
                 <button
-                  classname="block focus:outline-none truncate row-start"
+                  className="block focus:outline-none truncate row-start"
                   onClick={() => blockUser(el?.userId)}
                 >
                   Block
