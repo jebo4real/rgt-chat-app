@@ -1,0 +1,19 @@
+{
+  "name": "mern-shopping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/dist/index.js",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cd server && npm run watch",
+    "dev:client": "cd client && yarn start",
+    "install": "cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [],
+  "author": "John Jebo",
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
