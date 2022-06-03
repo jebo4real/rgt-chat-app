@@ -49,11 +49,9 @@ function MessageArea() {
 
     return () => {
       socket.off();
-      // setChat([])
     };
   }, []);
 
-console.log(chat.sort(sortAsc))
   useEffect(() => {
     if(![undefined, null, ""].includes(selectedUser)) getChatInteraction();  
   }, [getChatInteraction, selectedUser]);
