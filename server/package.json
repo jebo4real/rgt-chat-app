@@ -28,6 +28,7 @@
     "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
-    "socket.io": "^4.5.1"
+    "socket.io": "^4.5.1",
+    "tsc": "^2.0.4"
   }
 }
