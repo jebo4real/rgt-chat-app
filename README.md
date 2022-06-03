@@ -7,6 +7,8 @@
 - [Tailwind](https://tailwindcss.com/)
 - [NodeJs(Express)](https://nodejs.org/)
 - [MongoDB](https://www.mongodb.com/)
+- [Redis](https://www.redis.io/)
+- [SocketIO](https://socket.io/)
 
 
 ## How To Use
