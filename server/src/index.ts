@@ -2,8 +2,8 @@ import bodyParser from "body-parser";
 import express from "express";
 import * as http from "http";
 import * as socketio from "socket.io";
-// import { createAdapter } from "@socket.io/redis-adapter";
-// import { createClient } from "redis";
+import { createAdapter } from "@socket.io/redis-adapter";
+import { createClient } from "redis";
 import path from "path";
 
 import { SaveChat } from "./controllers/chat";
@@ -42,10 +42,14 @@ const server = http.createServer(app);
 const io = new socketio.Server(server, {allowEIO3: true});
 
 
-// const pubClient = createClient({ url: "redis://redis-15424.c268.eu-west-1-2.ec2.cloud.redislabs.com" });
-// const subClient = pubClient.duplicate();
+const pubClient = createClient({ url: "redis://default:jqaLm0Yf6MDOutMCaLtnCBLFXAKvTCaC@redis-15424.c268.eu-west-1-2.ec2.cloud.redislabs.com:15424", legacyMode: true });
+const subClient = pubClient.duplicate();
 
-// io.adapter(createAdapter(pubClient, subClient));
+pubClient.on("error", (err) => {
+  console.log(err);
+});
+
+io.adapter(createAdapter(pubClient, subClient));
 
 const port = process.env.PORT || 3001;
 
