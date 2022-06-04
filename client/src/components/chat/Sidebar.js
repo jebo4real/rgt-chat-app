@@ -15,7 +15,6 @@ const Sidebar = () => {
 
   useEffect(() => {
     socket.on("user-online", (list) => {
-      setUsersOnline([]);
       setUsersOnline(list);
     });
 
@@ -89,11 +88,10 @@ const Sidebar = () => {
 
   return (
     <div className="lg:block pl-4 pr-4 w-64 bg-gray-900 text-white">
-    
       <p>
         Me: {localStorage.getItem("nickname")}{" "}
         <button
-          className="ml-8 flex-shrink-0 bg-gray-900 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-900 focus:outline-none focus:ring-2"
+          className="ml-8 flex-shrink-0 bg-gray-900 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-900 focus:outline-none focus:ring-2 hover:border-white border-transparent border-2"
           onClick={() => logUserOut()}
         >
           Log out
@@ -103,23 +101,29 @@ const Sidebar = () => {
       <ul className="divide-y divide-gray-300 truncate">
         {usersOnline !== null
           ? usersOnline
-                .filter((item) => item.userId !== localStorage.getItem("userId") || null || undefined)
-                .filter(filterBlockedUsersOnline).map((el, index) => (
-              <li key={index} className="flex flex-row gap-4">
-                <button
-                  onClick={() => saveUserToMessage(el)}
-                  className="block focus:outline-none truncate row-start"
-                >
-                  {el?.userName}
-                </button>
-                <button
-                  className="block focus:outline-none truncate row-start"
-                  onClick={() => blockUser(el?.userId)}
-                >
-                  Block
-                </button>
-              </li>
-            ))
+              .filter(
+                (item) =>
+                  item.userId !== localStorage.getItem("userId") ||
+                  null ||
+                  undefined
+              )
+              .filter(filterBlockedUsersOnline)
+              .map((el, index) => (
+                <li key={index} className="flex flex-row gap-4 ">
+                  <button
+                    onClick={() => saveUserToMessage(el)}
+                    className="block focus:outline-none truncate row-start hover:border-white border-transparent border-2"
+                  >
+                    {el?.userName}
+                  </button>
+                  <button
+                    className="block focus:outline-none truncate row-start hover:border-white border-transparent border-2"
+                    onClick={() => blockUser(el?.userId)}
+                  >
+                    Block
+                  </button>
+                </li>
+              ))
           : ""}
       </ul>
     </div>

@@ -50,7 +50,18 @@ const Chat = () => {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    if(message === ""){
+
+    if([null, undefined, ""].includes(selectedUser)){
+      return toast("Select a user to chat!", {
+        duration: 4000,
+        style: {},
+        className: "",
+        role: "status",
+        ariaLive: "polite",
+      });
+    }
+
+    if(message === "" ){
       return toast("Enter a message!", {
         duration: 4000,
         style: {},

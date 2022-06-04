@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import toast from "react-hot-toast";
 
 import { default as socket } from "../../services/ws";
 import SelectUserContext from "../../context/select-context";
@@ -9,6 +10,11 @@ function MessageArea() {
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const { selectedUser } = useContext(SelectUserContext);
 
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
 
   const getChatInteraction = async () => {
 
@@ -44,7 +50,20 @@ function MessageArea() {
 
   useEffect(() => {
     socket.on(`chat-message-${userId}`, async (chat) => {
+      
       setChat((prevChats) => [...prevChats, chat]);
+      scrollToBottom()
+
+      if(chat?.receiverId === userId){
+        toast("Received a message", {
+          duration: 4000,
+          style: {},
+          className: "",
+          role: "status",
+          ariaLive: "polite",
+        });
+      }
+     
     });
 
     return () => {
@@ -54,12 +73,14 @@ function MessageArea() {
 
   useEffect(() => {
     if(![undefined, null, ""].includes(selectedUser)) getChatInteraction();  
+    scrollToBottom()
   }, [getChatInteraction, selectedUser]);
 
   return (
     <div
       id="msg"
       className="h-5/6 overflow-y-auto pl-4 lg:pl-8 pt-4 mb-2 lg:mb-0 h-32"
+      ref={messagesEndRef}
     >
       {chat.length < 1 ? (
         <p className="flex items-center justify-center h-screen">Select a user to chat</p>
