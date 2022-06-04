@@ -13,7 +13,6 @@
 
 ## How To Use
 
-<!-- Example: -->
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
@@ -37,3 +36,11 @@ $ npm run dev:server
 
 # Run client alone
 $ npm run dev:client
+
+
+## Challenges / Issues
+
+# Scroll behaviour in the chat / message area: Scroll does not scroll down to the bottom when new message is received. You have to manually scroll down.
+
+# Unable to fully develop the mobile responsiveness of the frontend / client to time constraints. 
+
